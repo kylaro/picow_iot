@@ -1,13 +1,21 @@
 # Pico W IoT project
 
 ## How to use: 
+
 Attach SCD41 sensor + LEDs to Pico W
+
 Install MicroPython on Pico W
+
 Use Thonny IDE to upload python files to Pico W
+
 Set up backend in AWS to write / read DynamoDB
+
 Upload website as static site to AWS S3
+
 ???
+
 Profit
+
 
 Currently hosted at:
 http://my-leeuwarden-co2.s3-website.eu-west-3.amazonaws.com/
