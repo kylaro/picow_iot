@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment Data Charts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Buttons for time ranges -->
+    <div>
+        <button onclick="fetchDataAndRenderCharts('15min')">15 Minutes</button>
+        <button onclick="fetchDataAndRenderCharts('1hour')">1 Hour</button>
+        <button onclick="fetchDataAndRenderCharts('6hour')">6 Hour</button>
+        <button onclick="fetchDataAndRenderCharts('12hour')">12 Hour</button>
+        <button onclick="fetchDataAndRenderCharts('1day')">1 Day</button>
+        <button onclick="fetchDataAndRenderCharts('7day')">7 Day</button>
+        <button onclick="fetchDataAndRenderCharts('30day')">30 Day</button>
+        <button onclick="fetchDataAndRenderCharts('30day')">90 Day</button>
+        <button onclick="fetchDataAndRenderCharts('30day')">1 Year</button>
+        <button onclick="fetchDataAndRenderCharts('all')">All</button>
+        <!-- ... other buttons -->
+    </div>
+    <div class="chart-container">
+        <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="humidityChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="co2Chart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
