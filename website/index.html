@@ -8,27 +8,22 @@
 </head>
 <body>
     <!-- Buttons for time ranges -->
+    <h1 id="time-range">Time Range: 1 Day</h1>
     <div>
-        <button onclick="fetchDataAndRenderCharts('15min')">15 Minutes</button>
-        <button onclick="fetchDataAndRenderCharts('1hour')">1 Hour</button>
-        <button onclick="fetchDataAndRenderCharts('6hour')">6 Hour</button>
-        <button onclick="fetchDataAndRenderCharts('12hour')">12 Hour</button>
-        <button onclick="fetchDataAndRenderCharts('1day')">1 Day</button>
-        <button onclick="fetchDataAndRenderCharts('7day')">7 Day</button>
-        <button onclick="fetchDataAndRenderCharts('30day')">30 Day</button>
-        <button onclick="fetchDataAndRenderCharts('30day')">90 Day</button>
-        <button onclick="fetchDataAndRenderCharts('30day')">1 Year</button>
-        <button onclick="fetchDataAndRenderCharts('all')">All</button>
+        <button onclick="fetchDataAndRenderChart('15 minutes')">15 minutes</button>
+        <button onclick="fetchDataAndRenderChart('1 hour')">1 hour</button>
+        <button onclick="fetchDataAndRenderChart('6 hours')">6 hours</button>
+        <button onclick="fetchDataAndRenderChart('12 hours')">12 hours</button>
+        <button onclick="fetchDataAndRenderChart('1 day')">1 day</button>
+        <button onclick="fetchDataAndRenderChart('7 days')">7 days</button>
+        <button onclick="fetchDataAndRenderChart('30 days')">30 days</button>
+        <button onclick="fetchDataAndRenderChart('3 months')">3 months</button>
+        <button onclick="fetchDataAndRenderChart('1 year')">1 year</button>
+        <button onclick="fetchDataAndRenderChart('All')">All</button>
         <!-- ... other buttons -->
     </div>
     <div class="chart-container">
-        <canvas id="temperatureChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas id="humidityChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas id="co2Chart"></canvas>
+        <canvas id="environmentChart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>

@@ -1,41 +1,96 @@
+let chartInstance;
+
 document.addEventListener("DOMContentLoaded", function() {
-    fetchDataAndRenderCharts();
+    fetchDataAndRenderChart('1 day');
 });
 
-function fetchDataAndRenderCharts() {
-    fetch('https://0wc4ksyc6a.execute-api.eu-west-3.amazonaws.com/RetrieveData') // Replace with your API Gateway URL
+function fetchDataAndRenderChart(timeRange) {
+    const url = `https://0wc4ksyc6a.execute-api.eu-west-3.amazonaws.com/RetrieveData?range=${timeRange}`;
+
+    // change time-range header to reflect new timeRange
+    const timeRangeElement = document.getElementById('time-range');
+    timeRangeElement.innerHTML = `Time range = ${timeRange}`;
+
+    fetch(url)
         .then(response => response.json())
         .then(data => {
-            renderChart(data, 'temperatureChart','temperature', 'Temperature (C)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 1)');
-            renderChart(data, 'humidityChart', 'humidity', 'Humidity (%)', 'rgba(40, 167, 69, 0.5)', 'rgba(40, 167, 69, 1)');
-            renderChart(data, 'co2Chart','co2', 'CO2 (ppm)', 'rgba(220, 53, 69, 0.5)', 'rgba(220, 53, 69, 1)');
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            renderChart(data);
         })
         .catch(error => console.error('Error fetching data:', error));
 }
 
-function renderChart(data, canvasId, key, label, backgroundColor, borderColor) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
-    const timestamps = data.map(item => item.timestamp);
-    const values = data.map(item => item[key]);
+function renderChart(data) {
+    const ctx = document.getElementById('environmentChart').getContext('2d');
+    const timestamps = data.map(item => new Date(item.timestamp).toLocaleTimeString());
+    const temperatures = data.map(item => item.temperature);
+    const humidities = data.map(item => item.humidity);
+    const co2Levels = data.map(item => item.co2);
 
-    new Chart(ctx, {
+    chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: timestamps,
-            datasets: [{
-                label: label,
-                data: values,
-                backgroundColor: backgroundColor,
-                borderColor: borderColor,
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: 'Temperature (C)',
+                    data: temperatures,
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    yAxisID: 'yTemperature', // Corrected yAxisID
+                },
+                {
+                    label: 'Humidity (%)',
+                    data: humidities,
+                    borderColor: 'rgba(40, 167, 69, 1)',
+                    backgroundColor: 'rgba(40, 167, 69, 0.5)',
+                    yAxisID: 'yHumidity', // Corrected yAxisID
+                },
+                {
+                    label: 'CO2 (ppm)',
+                    data: co2Levels,
+                    borderColor: 'rgba(220, 53, 69, 1)',
+                    backgroundColor: 'rgba(220, 53, 69, 0.5)',
+                    yAxisID: 'yCo2', // Corrected yAxisID
+                }
+            ],
         },
         options: {
             scales: {
-                y: {
-                    beginAtZero: true
+                yTemperature: {
+                    position: 'right',
+                    grid: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Temperature (C)'
+                    }
+                },
+                yHumidity: {
+                    position: 'left',  // Changed position for Humidity to 'right'
+                    grid: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Humidity (%)'
+                    }
+                },
+                yCo2: {
+                    position: 'right',
+                    grid: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'CO2 (ppm)'
+                    },
+                    offset: true
                 }
             }
-        }
+        }        
     });
 }
