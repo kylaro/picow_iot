@@ -33,6 +33,7 @@ function renderChart(data) {
         type: 'line',
         data: {
             labels: timestamps,
+            
             datasets: [
                 {
                     label: 'Temperature (C)',
@@ -40,6 +41,7 @@ function renderChart(data) {
                     borderColor: 'rgba(0, 123, 255, 1)',
                     backgroundColor: 'rgba(0, 123, 255, 0.5)',
                     yAxisID: 'yTemperature', // Corrected yAxisID
+                    pointHitRadius: 10,
                 },
                 {
                     label: 'Humidity (%)',
@@ -47,6 +49,7 @@ function renderChart(data) {
                     borderColor: 'rgba(40, 167, 69, 1)',
                     backgroundColor: 'rgba(40, 167, 69, 0.5)',
                     yAxisID: 'yHumidity', // Corrected yAxisID
+                    pointHitRadius: 10,
                 },
                 {
                     label: 'CO2 (ppm)',
@@ -54,10 +57,17 @@ function renderChart(data) {
                     borderColor: 'rgba(220, 53, 69, 1)',
                     backgroundColor: 'rgba(220, 53, 69, 0.5)',
                     yAxisID: 'yCo2', // Corrected yAxisID
+                    pointHitRadius: 10,
                 }
             ],
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },        
             scales: {
                 yTemperature: {
                     position: 'right',

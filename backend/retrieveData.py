@@ -4,9 +4,6 @@ from datetime import datetime, timedelta
 
 dynamodb = boto3.resource('dynamodb')
 
-cache = {
-    ""
-}
 
 def resample_data(original_list, target_length):
     if not original_list or target_length <= 0:
