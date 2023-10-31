@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     text-align: center;
+    align-items: center;
 }
 
 .chart-container {
@@ -15,3 +16,28 @@ canvas {
     width: 100% !important;
     height: 100% !important;
 }
+
+
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+  }
+  
+  .spinner {
+    border: 10px solid rgba(0, 0, 0, 0.1); /* Light grey border */
+    border-top: 10px solid #3498db; /* Blue color for the top border */
+    border-radius: 50%; /* Circular border */
+    width: 200px; /* Size of the spinner */
+    height: 200px;
+    animation: spin 0.5s linear infinite; /* Faster Animation */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

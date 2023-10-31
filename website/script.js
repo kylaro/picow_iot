@@ -1,7 +1,7 @@
 let chartInstance;
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetchDataAndRenderChart('1 day');
+    fetchDataAndRenderChart('1 hour');
 });
 
 function fetchDataAndRenderChart(timeRange) {
@@ -20,6 +20,9 @@ function fetchDataAndRenderChart(timeRange) {
             renderChart(data);
         })
         .catch(error => console.error('Error fetching data:', error));
+    //hide spinner
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'none';
 }
 
 function renderChart(data) {
