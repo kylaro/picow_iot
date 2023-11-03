@@ -1,18 +1,19 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 2px;
     text-align: center;
     align-items: center;
 }
 
 .chart-container {
     position: relative;
-    width: 80%;  /* Adjust the width percentage as required */
+    width: 100%;  /* Adjust the width percentage as required */
     height: 500px;  /* Adjust height as required */
     margin: 20px auto;
 }
 
 canvas {
+    display: block;
     width: 100% !important;
     height: 100% !important;
 }

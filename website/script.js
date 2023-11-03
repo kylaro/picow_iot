@@ -27,7 +27,7 @@ function fetchDataAndRenderChart(timeRange) {
 
 function renderChart(data) {
     const ctx = document.getElementById('environmentChart').getContext('2d');
-    const timestamps = data.map(item => new Date(item.timestamp).toLocaleTimeString());
+    const timestamps = data.map(item => item.timestamp);//data.map(item => new Date(item.timestamp).toLocaleTimeString());
     const temperatures = data.map(item => item.temperature);
     const humidities = data.map(item => item.humidity);
     const co2Levels = data.map(item => item.co2);
@@ -45,6 +45,8 @@ function renderChart(data) {
                     backgroundColor: 'rgba(0, 123, 255, 0.5)',
                     yAxisID: 'yTemperature', // Corrected yAxisID
                     pointHitRadius: 10,
+                    pointRadius: 2,      // Smaller value for smaller points
+                    borderWidth: 1       // Smaller value for thinner line
                 },
                 {
                     label: 'Humidity (%)',
@@ -53,6 +55,8 @@ function renderChart(data) {
                     backgroundColor: 'rgba(40, 167, 69, 0.5)',
                     yAxisID: 'yHumidity', // Corrected yAxisID
                     pointHitRadius: 10,
+                    pointRadius: 2,      // Smaller value for smaller points
+                    borderWidth: 1       // Smaller value for thinner line
                 },
                 {
                     label: 'CO2 (ppm)',
@@ -61,6 +65,8 @@ function renderChart(data) {
                     backgroundColor: 'rgba(220, 53, 69, 0.5)',
                     yAxisID: 'yCo2', // Corrected yAxisID
                     pointHitRadius: 10,
+                    pointRadius: 2,      // Smaller value for smaller points
+                    borderWidth: 1       // Smaller value for thinner line
                 }
             ],
         },
