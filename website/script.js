@@ -21,17 +21,13 @@ function fetchDataAndRenderChart(timeRange) {
         })
         .catch(error => console.error('Error fetching data:', error));
     //hide spinner
-    // const spinner = document.getElementById('spinner');
-    // spinner.style.display = 'none';
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'none';
 }
 
 function renderChart(data) {
     const ctx = document.getElementById('environmentChart').getContext('2d');
-    //const timestamps = data.map(item => item.timestamp);//data.map(item => new Date(item.timestamp).toLocaleTimeString());
-    //const timestamps = data.map(item => new Date(new Date(item.timestamp).getTime() + 60*60*1000)); // Has the timezone included
-    const timestamps = data.map(item => new Date(new Date(item.timestamp).getTime() + 60*60*1000).toLocaleString('en-US', { timeZoneName: 'short' }).split(' GMT')[0]);
-    //const timestamps = data.map(item => new Date(new Date(item.timestamp).getTime() + 60*60*1000).toJSON().slice(0, -5));
-
+    const timestamps = data.map(item => item.timestamp);//data.map(item => new Date(item.timestamp).toLocaleTimeString());
     const temperatures = data.map(item => item.temperature);
     const humidities = data.map(item => item.humidity);
     const co2Levels = data.map(item => item.co2);
