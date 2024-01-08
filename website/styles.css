@@ -42,3 +42,63 @@ canvas {
     100% { transform: rotate(360deg); }
   }
   
+button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 15px 32px; /* Larger padding for bigger size */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Larger font size */
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    transition-duration: 0.4s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker shade of green for hover effect */
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white; 
+  font-family: Arial, sans-serif; 
+  text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('sunset.webp'); 
+  background-size: cover;
+  background-position: center;
+  color: white; 
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+
+.outlined-text {
+  color: green; /* or any other color you want for the text */
+  text-shadow: 0 0 8px #fff;
+  margin: 0;
+}
+
+/* h1 {
+  margin: 0;
+  padding: 20px;
+} */

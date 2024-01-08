@@ -2,7 +2,7 @@ import boto3
 import json
 from datetime import datetime, timedelta
 from boto3.dynamodb.conditions import Key
-
+from zoneinfo import ZoneInfo
 
 
 dynamodb = boto3.resource('dynamodb')
@@ -102,7 +102,8 @@ def lambda_handler(event, context):
         }
 
 def calculate_start_timestamp(time_range):
-    now = datetime.now()
+    amsterdam_zone = ZoneInfo("Europe/Amsterdam")
+    now = datetime.now(amsterdam_zone)
     time_dict = {
         '15 minutes': timedelta(minutes=15),
         '1 hour': timedelta(hours=1),

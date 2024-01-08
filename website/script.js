@@ -1,8 +1,32 @@
 let chartInstance;
 
 document.addEventListener("DOMContentLoaded", function() {
+    fetchCurrentCO2();
     fetchDataAndRenderChart('1 hour');
 });
+
+function fetchCurrentCO2() {
+    const url = `https://0wc4ksyc6a.execute-api.eu-west-3.amazonaws.com/GetCurrentCO2`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming the Lambda function returns a string "device off" or an object with "averageCO2"
+            const co2Text = typeof data === 'string' ? data : `Current CO2: ${data.averageCO2} ppm`;
+            
+            // Update the h2 element
+            const co2Element = document.getElementById('currentCO2');
+            co2Element.innerHTML = co2Text;
+        })
+        .catch(error => {
+            console.error('Error fetching current CO2:', error);
+            // Update the h2 element in case of an error
+            const co2Element = document.getElementById('currentCO2');
+            co2Element.innerHTML = 'Error fetching data';
+        });
+}
+
+
 
 function fetchDataAndRenderChart(timeRange) {
     const url = `https://0wc4ksyc6a.execute-api.eu-west-3.amazonaws.com/RetrieveData?range=${timeRange}`;
@@ -21,8 +45,7 @@ function fetchDataAndRenderChart(timeRange) {
         })
         .catch(error => console.error('Error fetching data:', error));
     //hide spinner
-    const spinner = document.getElementById('spinner');
-    spinner.style.display = 'none';
+
 }
 
 function renderChart(data) {
@@ -113,3 +136,27 @@ function renderChart(data) {
         }        
     });
 }
+
+
+function updateCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date(Date.UTC(2024, 3, 7, 20, 55, 0)); // April 7th, 2024 at 20:55 UTC
+    const now = new Date(); // User's local time
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+        countdownElement.innerHTML = 'Countdown to April 7th, 2024: Time is up!';
+        clearInterval(countdownInterval);
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    const timeZoneString = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    countdownElement.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
+}
+
+const countdownInterval = setInterval(updateCountdown, 1000);
